@@ -7,7 +7,7 @@ function getRandomInt(min, max, diapason){
     console.log('Максимальное значение не должно быть меньше минимального')
   } else {
     let wholeNumber = Math.random() * (max - min + 1) + min;
-
+    // возвращаю число с заданным количеством знаков после запятой
     return Math.floor(wholeNumber * diapason) / diapason;
   }
 }

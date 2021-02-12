@@ -1,5 +1,46 @@
-// Функция для генерации положительного числа в т.ч. с плавающей запятой в заданном диапозоне
+const ADS_AMOUNT = 10;
+const TITLES = [
+  'Сдается уютная квартирка недалеко от метро',
+  'Сдам квартиру. Есть все условия для комфортного проживания',
+  'Лучшая квартира на районе!',
+  'Уютная квартира в центре города',
+  'Сдается квартира посуточно',
+  'Уютный причал для уставшего путника',
+];
+const DESCRIPTIONS = [
+  'Просторная квартира в туристическом районе, недалеко от метро, есть все необходимое для комфортного отдыха',
+  'Сдается посуточно квартира, со всеми условиями. Отличный вид с балкона',
+  'Лучше жилья вы не найдете! мы вам гарантируем!' +
+  'Японское гостеприимство в сочетании с европейским интерьером не оставят вас равнодушным! Вам позавидует сам Будда!',
+  'Лучшее предложение недалеко от Акихабары! Рядом находятся автобусные остановки, в квартире раздельный санузел,' +
+  'имеется комфортабельная кухня',
+];
+const TYPES = [
+  'palace',
+  'flat',
+  'house',
+  'bungalow',
+];
+const CHECKIN_AND_CHECKOUT_TIMES = [
+  '12:00',
+  '13:00',
+  '14:00',
+];
+const FEATURES = [
+  'wifi',
+  'dishwasher',
+  'parking',
+  'washer',
+  'elevator',
+  'conditioner',
+];
+const PHOTOS = [
+  'http://o0.github.io/assets/images/tokyo/hotel1.jpg',
+  'http://o0.github.io/assets/images/tokyo/hotel2.jpg',
+  'http://o0.github.io/assets/images/tokyo/hotel3.jpg',
+];
 
+// функция для получения рандомного целого числа в пределах от min до max
 function getRandomInt(min, max) {
   if (min < 0 || max < 0) {
     alert('Диапазон задан не верно')
@@ -12,8 +53,7 @@ function getRandomInt(min, max) {
   }
 }
 
-getRandomInt(0, 20);
-
+// функция для получения рандомного числа c плавающей запятой в пределах от min до max и кол-вом знаков после запятой
 function getRandomFloat(min, max, fractionDigits) {
   if (min < 0 || max < 0) {
     alert('Диапазон задан не верно')
@@ -26,93 +66,76 @@ function getRandomFloat(min, max, fractionDigits) {
     return floatNumber;
   }
 }
+
+// функция для получения рандомного значения из массива
+function getRandomArrayElement(arr) {
+  return arr[getRandomInt(0, arr.length - 1)];
+}
+
+// функция для создания и заполнения массива рандомной длины
+function getRandomArray(length, arr) {
+  return Array.from({ length }, () => getRandomArrayElement(arr));
+}
+
+// перемешивает массив
+function shuffle(arr) {
+  let currentIndex = arr.length, temporaryValue, randomIndex;
+
+  while (0 !== currentIndex) {
+
+    // Pick a remaining element...
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+
+    temporaryValue = arr[currentIndex];
+    arr[currentIndex] = arr[randomIndex];
+    arr[randomIndex] = temporaryValue;
+  }
+  return arr;
+}
+
+// функция для создания массива случайной длинный без повторяющихся элементов
+function getRandomArrayNoRep(arr) {
+  let arrLength = getRandomInt(1, arr.length);
+  let newArr = shuffle(arr).slice(getRandomInt(1, arr.length), arrLength.length);
+
+  return newArr;
+}
+
+// функция-конструктор, заполняет объект рандомными данными
+function createAd() {
+  const location = {
+    x: getRandomFloat(35.65000, 35.70000, 5),
+    y: getRandomFloat(139.70000, 139.80000, 5),
+  };
+
+  return {
+    author: { avatar: `img/avatars/user0${getRandomInt(1, 8)}.png` },
+    offer: {
+      title: getRandomArrayElement(TITLES),
+      address: `${location.x}, ${location.y}`,
+      price: getRandomInt(10000, 20000),
+      type: getRandomArrayElement(TYPES),
+      rooms: getRandomInt(1, 4),
+      guests: getRandomInt(1, 6),
+      checkIn: getRandomArrayElement(CHECKIN_AND_CHECKOUT_TIMES),
+      checkOut: getRandomArrayElement(CHECKIN_AND_CHECKOUT_TIMES),
+      features: getRandomArrayNoRep(FEATURES),
+      description: getRandomArrayElement(DESCRIPTIONS),
+      photos: getRandomArray(getRandomInt(1, 10), PHOTOS),
+    },
+    location,
+  };
+}
+
+// функция-размноживатель, создает нужное количество объявлений
+function createAds(length) {
+  // return new Array(length).fill(null).map(createAd);
+  // return new Array(length).fill(null).map(() => createAd());
+  return Array.from({ length }, createAd);
+}
+
 getRandomFloat(0, 20, 3);
-
-
-// Функция для генерации временных данных
-
-const AUTOR = [
-  'img/avatars/user01.png',
-  'img/avatars/user02.png',
-  'img/avatars/user03.png',
-  'img/avatars/user04.png',
-  'img/avatars/user05.png',
-  'img/avatars/user06.png',
-  'img/avatars/user07.png',
-  'img/avatars/user08.png',
-]
-
-const TITLE = [
-  'Сдается уютная квартирка недалеко от метро',
-  'Сдам квартиру. Есть все условия для комфортного проживания',
-  'Лучшая квартира на районе!',
-  'Уютная квартира в центре города',
-  'Сдается квартира посуточно',
-  'Уютный причал для уставшего путника',
-]
-
-const address = [
-  // строка — адрес предложения.
-  // Для простоты пусть пока составляется из географических координат по маске {{location.x}}, {{location.y}}
-]
-const price = [
-// число — стоимость. Любое положительное число.
-]
-
-const TYPE = [
-  'palace',
-  'flat',
-  'house',
-  'bungalow',
-]
-const rooms = [
-  // число — количество комнат. Любое положительное число.
-]
-
-const guests = [
-  // число — количество гостей, которое можно разместить. Любое положительное число.
-]
-
-const CHECKIN = [
-  '12:00',
-  '13:00',
-  '14:00',
-]
-
-const CHECKOUT = [
-  '12:00',
-  '13:00',
-  '14:00',
-]
-
-const FEATURES = [
-  'wifi',
-  'dishwasher',
-  'parking',
-  'washer',
-  'elevator',
-  'conditioner',
-]
-
-const DESCRIPTION = [
-  'Просторная квартира в туристическом районе, недалеко от метро, есть все необходимое для комфортного отдыха',
-  'Сдается посуточно квартира, со всеми условиями. Отличный вид с балкона',
-  'Лучше жилья вы не найдете! мы вам гарантируем!' +
-  'Японское гостеприимство в сочетании с европейским интерьером не оставят вас равнодушным! Вам позавидует сам Будда!',
-  'Лучшее предложение недалеко от Акихабары! Рядом находятся автобусные остановки, в квартире раздельный санузел,' +
-  'имеется комфортабельная кухня',
-]
-
-const PHOTOS = [
-  'http://o0.github.io/assets/images/tokyo/hotel1.jpg',
-  'http://o0.github.io/assets/images/tokyo/hotel2.jpg',
-  'http://o0.github.io/assets/images/tokyo/hotel3.jpg',
-]
-
-const location = [
-  // объект — местоположение в виде географических координат. Состоит из двух полей:
-  // x, число с плавающей точкой — широта, случайное значение от 35.65000 до 35.70000
-  //
-  // y, число с плавающей точкой — долгота, случайное значение от 139.70000 до 139.80000
-]
+getRandomInt(0, 20);
+createAds(ADS_AMOUNT);
 

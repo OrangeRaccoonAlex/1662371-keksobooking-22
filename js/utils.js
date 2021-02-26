@@ -82,7 +82,7 @@ function createAd() {
       checkOut: getRandomArrayElement(CHECKIN_AND_CHECKOUT_TIMES),
       features: getRandomArrayNoRep(FEATURES),
       description: getRandomArrayElement(DESCRIPTIONS),
-      photos: getRandomArray(getRandomInt(1, 10), PHOTOS),
+      photos: getRandomArray(getRandomInt(1, 5), PHOTOS),
     },
     location,
   };
@@ -98,4 +98,6 @@ function createAds(length) {
 getRandomFloat(0, 20, 3);
 getRandomInt(0, 20);
 createAds(ADS_AMOUNT);
+
+export { createAd };
 

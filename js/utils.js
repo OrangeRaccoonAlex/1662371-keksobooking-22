@@ -99,5 +99,5 @@ getRandomFloat(0, 20, 3);
 getRandomInt(0, 20);
 createAds(ADS_AMOUNT);
 
-export { createAd };
+export { createAd, createAds };
 

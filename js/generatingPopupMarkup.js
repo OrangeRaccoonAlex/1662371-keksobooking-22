@@ -79,3 +79,5 @@ function fillPopupTemplate(){
 
 createPopupTemplate();
 
+export { createPopupTemplate }
+

@@ -5,3 +5,4 @@ import './leafletMapSettings.js';
 import {deactivatePage} from './stateOfPage.js';
 
 deactivatePage();
+

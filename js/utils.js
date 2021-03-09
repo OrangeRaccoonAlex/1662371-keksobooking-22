@@ -65,15 +65,15 @@ function getRandomArrayNoRep(arr) {
 // функция-конструктор, заполняет объект рандомными данными
 function createAd() {
   const location = {
-    lat: getRandomFloat(35.65000, 35.70000, 5),
-    lng: getRandomFloat(139.70000, 139.80000, 5),
+    x: getRandomFloat(35.65000, 35.70000, 5),
+    y: getRandomFloat(139.70000, 139.80000, 5),
   };
 
   return {
     author: { avatar: `img/avatars/user0${getRandomInt(1, 8)}.png` },
     offer: {
       title: getRandomArrayElement(TITLES),
-      address: `${location.lat}, ${location.lng}`,
+      address: `${location.x}, ${location.y}`,
       price: getRandomInt(10000, 20000),
       type: getRandomArrayElement(TYPES),
       rooms: getRandomInt(1, 4),
@@ -99,5 +99,5 @@ getRandomFloat(0, 20, 3);
 getRandomInt(0, 20);
 createAds(ADS_AMOUNT);
 
-export { createAd, createAds };
+export { createAd, createAds, getRandomFloat };
 

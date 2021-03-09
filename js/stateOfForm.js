@@ -1,9 +1,9 @@
 let adForm = document.querySelector('.ad-form');
+let adFormFieldset = adForm.querySelectorAll('fieldset');
 
 function activateForm(){
   adForm.classList.remove('ad-form--disabled');
 
-  let adFormFieldset = adForm.querySelectorAll('fieldset');
   adFormFieldset.forEach((el) => {
     el.setAttribute('disabled', 'false');
   });
@@ -12,10 +12,14 @@ function activateForm(){
 function deactivateForm(){
   adForm.classList.add('ad-form--disabled');
 
-  let adFormFieldset = adForm.querySelectorAll('fieldset');
   adFormFieldset.forEach((el) => {
     el.setAttribute('disabled', 'true');
   });
 }
 
-export { activateForm, deactivateForm };
+function setAddress(x, y){
+  let address = adForm.querySelector('#address')
+  address.value = `${x}, ${y}`;
+}
+
+export { activateForm, deactivateForm, setAddress };

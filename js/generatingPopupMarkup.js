@@ -1,22 +1,10 @@
 import './utils.js';
-import { createAd, createAds } from './utils.js';
 import { typeOfHousing } from './dictionary.js'
-import { ADS_AMOUNT } from './constants.js'
 
 const popupTemplate = document.querySelector('#card').content.querySelector('.popup');
 
-function createPopupTemplate() {
-
-  let popup = popupTemplate.cloneNode(true);
-
-  for(let i = 0; i < createAds(ADS_AMOUNT).length; i++) {
-    //popupTemplate.appendChild(popup.cloneNode(true));
-    popup = fillPopupTemplate(popup);
-  }
-}
-
-function fillPopupTemplate(popup){
-  let data = createAd();
+function fillPopupTemplate(data){
+  const popup = popupTemplate.cloneNode(true);
 
   if (data.offer.title) {
     let popupTitle = popup.querySelector('.popup__title');
@@ -80,6 +68,10 @@ function fillPopupTemplate(popup){
   return popup;
 }
 
-createPopupTemplate();
+function createCustomPopup(point){
+  return fillPopupTemplate(point);
+}
+
+export { createCustomPopup }
 
 

@@ -6,11 +6,11 @@ function activateMapFilters(){
   mapFilters.classList.remove('map__filters--disabled');
 
   mapFiltersSelects.forEach((el) => {
-    el.setAttribute('disabled', 'false');
+    el.removeAttribute('disabled');
   });
 
   mapFiltersFieldset.forEach((el) => {
-    el.setAttribute('disabled', 'false');
+    el.removeAttribute('disabled');
   });
 }
 

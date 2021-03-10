@@ -5,7 +5,7 @@ function activateForm(){
   adForm.classList.remove('ad-form--disabled');
 
   adFormFieldset.forEach((el) => {
-    el.setAttribute('disabled', 'false');
+    el.removeAttribute('disabled');
   });
 }
 

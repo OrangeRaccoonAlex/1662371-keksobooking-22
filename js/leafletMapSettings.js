@@ -2,9 +2,8 @@
 
 import { setAddress } from './stateOfForm.js';
 import { activatePage } from './stateOfPage.js'
-import { createAds } from './utils.js'
-import { ADS_AMOUNT } from './constants.js'
 import { createCustomPopup } from './generatingPopupMarkup.js'
+import  { getData } from './workWithServer.js'
 
 const map = L.map('map-canvas')
   .on('load', () => {
@@ -54,22 +53,32 @@ function addMainPin() {
 addMainPin();
 
 // добавляю не основные метки
-let ads = createAds(ADS_AMOUNT);
 
-ads.forEach((ad) => {
-  const { x: lat, y: lng } = ad.location;
-  const pinIcon = L.icon({
-    iconUrl: '../img/pin.svg',
-    iconSize: [40, 40],
-    iconAnchor: [20, 40],
+function renderPins(ads){
+  ads.forEach((ad) => {
+    const { lat, lng} = ad.location;
+    const pinIcon = L.icon({
+      iconUrl: '../img/pin.svg',
+      iconSize: [40, 40],
+      iconAnchor: [20, 40],
+    });
+    const marker = L.marker(
+      {lat, lng},
+      {icon: pinIcon},
+    );
+    marker.addTo(map).bindPopup(createCustomPopup(ad));
+
   });
-  const marker = L.marker(
-    { lat, lng },
-    { icon: pinIcon },
-  );
+}
 
-  marker.addTo(map).bindPopup(createCustomPopup(ad));
-});
+function renderPinsWithError(){
+  // TODO красиво вывести сообщение об ошибке
+  alert('Ой! Кажется, что-то пошло не так :( попробуйте перезагрузить страницу')
+}
+
+getData(renderPins, renderPinsWithError);
+
+
 
 
 

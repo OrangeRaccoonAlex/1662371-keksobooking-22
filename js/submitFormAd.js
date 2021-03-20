@@ -20,4 +20,21 @@ adForm.addEventListener('submit', (evt) => {
   sendData(formData, showSuccessMessage, showErrorMessage);
 });
 
+function hideMessage(){
+  adForm.addEventListener('keydown', function(evt) {
+    if (evt.keyCode === 27) {
+      successMessage.style['display'] = 'none';
+      errorMessage.style['display'] = 'none';
+    }
+  });
+}
+
+/*
+* при клике на esc мои сообщения должны закрываться
+* вот я показываю сообщение, далее должен начать работать слушатель (отдельная функция)
+* сообщения показываются когда? когда отработал промис, значит функцию надо отправлять в промис
+* как только кнопка была нажата, я прячу сообщения, например, через display: none
+*
+* */
+
 

@@ -1,11 +1,12 @@
 // import {MAIN_PIN_COORDINATES} from './constants.js';
-import {resetMainPin} from './leafletMapSettings.js';
+// import {resetMainPin} from './leafletMapSettings.js';
 
 const adForm = document.querySelector('.ad-form');
 const adFormFieldset = adForm.querySelectorAll('fieldset');
-const resetFormButton = adForm.querySelector('.ad-form__reset')
+// const resetFormButton = adForm.querySelector('.ad-form__reset')
+const address = adForm.querySelector('#address')
 
-function activateForm(){
+function activate(){
   adForm.classList.remove('ad-form--disabled');
 
   adFormFieldset.forEach((el) => {
@@ -13,7 +14,8 @@ function activateForm(){
   });
 }
 
-function deactivateForm(){
+function deactivate(){
+  // TODO возможно, нужно очищать форму объявления
   adForm.classList.add('ad-form--disabled');
 
   adFormFieldset.forEach((el) => {
@@ -22,7 +24,6 @@ function deactivateForm(){
 }
 
 function setAddress(x, y){
-  let address = adForm.querySelector('#address')
   address.value = `${x}, ${y}`;
 }
 
@@ -32,12 +33,12 @@ function resetForm(evt) {
   // setAddress(MAIN_PIN_COORDINATES.lat, MAIN_PIN_COORDINATES.lng);
 }
 
-resetFormButton.addEventListener('click', resetForm);
+// resetFormButton.addEventListener('click', resetForm);
+//
+// adForm.addEventListener('submit', resetMainPin);
+// adForm.addEventListener('reset', resetMainPin);
 
-adForm.addEventListener('submit', resetMainPin);
-adForm.addEventListener('reset', resetMainPin);
-
-export { activateForm, deactivateForm, setAddress, resetForm };
+export { activate, deactivate, setAddress };
 
 /*
 * 1. при упешной отправке или при клике на "очистить" сбрасывать значения в форме

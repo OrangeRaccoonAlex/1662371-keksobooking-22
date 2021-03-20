@@ -1,9 +1,10 @@
 /* global L:readonly */
 
-import { setAddress } from './stateOfForm.js';
+// import { setAddress } from './stateOfForm.js';
 import { activatePage } from './stateOfPage.js'
 import { createCustomPopup } from './generatingPopupMarkup.js'
 import  { getData } from './workWithServer.js'
+import { MAIN_PIN_COORDINATES } from './constants.js'
 
 const map = L.map('map-canvas')
   .on('load', () => {
@@ -21,36 +22,33 @@ L.tileLayer(
   },
 ).addTo(map);
 
-function addMainPin() {
-  const mainPinIcon = L.icon({
-    iconUrl: '/img/main-pin.svg',
-    iconSize: [52, 52],
-    iconAnchor: [26, 52],
-  });
+const mainPinIcon = L.icon({
+  iconUrl: '/img/main-pin.svg',
+  iconSize: [52, 52],
+  iconAnchor: [26, 52],
+});
 
-  const mainPinMarker = L.marker(
-    {
-      lat: 35.681700,
-      lng: 139.753882,
-    },
-    {
-      draggable: true,
-      icon: mainPinIcon,
-    },
-  );
+const mainPinMarker = L.marker(
+  MAIN_PIN_COORDINATES,
+  {
+    draggable: true,
+    icon: mainPinIcon,
+  },
+);
 
-  setAddress(35.681700, 139.753882);
+// setAddress(MAIN_PIN_COORDINATES.lat, MAIN_PIN_COORDINATES.lng);
 
-  mainPinMarker.on('moveend', function() {
-    let x = Number(mainPinMarker.getLatLng().lat.toFixed(5));
-    let y = Number(mainPinMarker.getLatLng().lng.toFixed(5));
-    setAddress(x, y);
-  });
+// mainPinMarker.on('moveend', function() {
+//   let x = Number(mainPinMarker.getLatLng().lat.toFixed(5));
+//   let y = Number(mainPinMarker.getLatLng().lng.toFixed(5));
+//   // setAddress(x, y);
+// });
 
-  mainPinMarker.addTo(map);
+mainPinMarker.addTo(map);
+
+function resetMainPin(){
+  mainPinMarker.setLatLng(MAIN_PIN_COORDINATES);
 }
-
-addMainPin();
 
 // добавляю не основные метки
 
@@ -77,6 +75,8 @@ function renderPinsWithError(){
 }
 
 getData(renderPins, renderPinsWithError);
+
+export { resetMainPin };
 
 
 

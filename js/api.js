@@ -12,7 +12,7 @@ function getOffers(onSuccess, onError) {
     .catch((error) => {
       onError(error);
     });
-};
+}
 
 function createOffer(offer, onSuccess, onError){
   fetch('https://22.javascript.pages.academy/keksobooking', {

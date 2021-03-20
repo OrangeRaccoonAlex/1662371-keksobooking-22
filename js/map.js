@@ -1,9 +1,9 @@
 /* global L:readonly */
 
 import * as page from './page.js'
-import { setAddress } from './adForm.js'
+import { setAddress } from './ad-form.js'
 import { MAIN_PIN_COORDINATES } from './constants.js'
-import {createCustomPopup} from './generatingPopupMarkup.js';
+import {createCustomPopup} from './generating-popup-markup.js';
 import {getOffers} from './api.js';
 
 let map;

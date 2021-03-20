@@ -1,3 +1,5 @@
+// TODO refactor
+
 const ADS_AMOUNT = 10;
 const TITLES = [
   'Сдается уютная квартирка недалеко от метро',
@@ -40,6 +42,7 @@ const PHOTOS = [
   'http://o0.github.io/assets/images/tokyo/hotel3.jpg',
 ];
 
+// TODO перенести в исопльзуемый модуль
 const MAIN_PIN_COORDINATES = {
   lat: 35.681700,
   lng: 139.753882,

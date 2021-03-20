@@ -1,4 +1,3 @@
-import './utils.js';
 import { typeOfHousing } from './dictionary.js'
 
 const popupTemplate = document.querySelector('#card').content.querySelector('.popup');

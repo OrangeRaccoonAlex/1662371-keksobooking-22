@@ -1,10 +1,11 @@
-// import {MAIN_PIN_COORDINATES} from './constants.js';
-// import {resetMainPin} from './leafletMapSettings.js';
+import {createOffer} from './api.js';
 
 const adForm = document.querySelector('.ad-form');
 const adFormFieldset = adForm.querySelectorAll('fieldset');
-// const resetFormButton = adForm.querySelector('.ad-form__reset')
 const address = adForm.querySelector('#address')
+const successMessage = document.querySelector('#success').content.querySelector('.success');
+const errorMessage = document.querySelector('#error').content.querySelector('.error');
+const main = document.querySelector('main');
 
 function activate(){
   adForm.classList.remove('ad-form--disabled');
@@ -12,6 +13,9 @@ function activate(){
   adFormFieldset.forEach((el) => {
     el.removeAttribute('disabled');
   });
+
+  adForm.addEventListener('submit', submit);
+  adForm.addEventListener('reset', reset);
 }
 
 function deactivate(){
@@ -21,22 +25,45 @@ function deactivate(){
   adFormFieldset.forEach((el) => {
     el.setAttribute('disabled', 'true');
   });
+
+  adForm.removeEventListener('submit', submit);
+  adForm.removeEventListener('reset', reset);
 }
 
 function setAddress(x, y){
   address.value = `${x}, ${y}`;
 }
 
-function resetForm(evt) {
-  evt.preventDefault();
-  adForm.reset();
-  // setAddress(MAIN_PIN_COORDINATES.lat, MAIN_PIN_COORDINATES.lng);
+// 2.6
+// TODO Сообщение должно исчезать по нажатию на клавишу Esc и по клику на произвольную область экрана.
+function showSuccessMessage(){
+  let successMessageTemplate = successMessage.cloneNode(true);
+  main.appendChild(successMessageTemplate);
 }
 
-// resetFormButton.addEventListener('click', resetForm);
-//
-// adForm.addEventListener('submit', resetMainPin);
-// adForm.addEventListener('reset', resetMainPin);
+// 2.7
+// TODO Сообщение должно исчезать после нажатия на кнопку .error__button, по нажатию на клавишу Esc
+//  и по клику на произвольную область экрана. В таком случае вся введённая пользователем информация сохраняется,
+//  чтобы у него была возможность отправить форму повторно.
+function showErrorMessage(){
+  let errorMessageTemplate = errorMessage.cloneNode(true);
+  main.appendChild(errorMessageTemplate);
+}
+
+function submit(evt){
+  evt.preventDefault();
+  const offer = new FormData(evt.target);
+  createOffer(offer, showSuccessMessage, showErrorMessage);
+}
+
+// 2.5
+// TODO починить пропадающий адрес
+// TODO переводить метку в начальное положение
+function reset(){
+  setTimeout(() => {
+    setAddress(35.500, 139.500);
+  }, 500)
+}
 
 export { activate, deactivate, setAddress };
 

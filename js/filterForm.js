@@ -28,5 +28,4 @@ function deactivate(){
   });
 }
 
-
 export { activate, deactivate };

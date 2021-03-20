@@ -31,8 +31,6 @@ function renderPinsWithError(){
 }
 
 function activate(){
-  console.log('map activated');
-
   map = L.map('map-canvas')
     .on('load', () => {
       page.activate();
@@ -71,7 +69,6 @@ function activate(){
 
 
 function deactivate(){
-  console.log('map deactivated');
   page.deactivate();
 
   if(!map){

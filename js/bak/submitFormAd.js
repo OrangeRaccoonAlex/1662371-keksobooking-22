@@ -20,14 +20,15 @@ adForm.addEventListener('submit', (evt) => {
   sendData(formData, showSuccessMessage, showErrorMessage);
 });
 
-function hideMessage(){
-  adForm.addEventListener('keydown', function(evt) {
-    if (evt.keyCode === 27) {
-      successMessage.style['display'] = 'none';
-      errorMessage.style['display'] = 'none';
-    }
-  });
-}
+// набросок функции, которая скрывает сообщения об ошибке или успешной отправке данных
+// function hideMessage(){
+//   adForm.addEventListener('keydown', function(evt) {
+//     if (evt.keyCode === 27) {
+//       successMessage.style['display'] = 'none';
+//       errorMessage.style['display'] = 'none';
+//     }
+//   });
+// }
 
 /*
 * при клике на esc мои сообщения должны закрываться

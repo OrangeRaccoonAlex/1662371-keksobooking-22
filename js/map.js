@@ -9,6 +9,7 @@ import {getOffers} from './api.js';
 let map;
 
 function renderPins(ads){
+  console.log(ads);
   ads.forEach((ad) => {
     const { lat, lng} = ad.location;
     const pinIcon = L.icon({
@@ -24,6 +25,10 @@ function renderPins(ads){
 
   });
 }
+
+// collectLocation(locations){
+//  renderPins(locations);
+// }
 
 function renderPinsWithError(){
   // TODO красиво вывести сообщение об ошибке

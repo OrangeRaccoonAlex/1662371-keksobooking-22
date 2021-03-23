@@ -1,14 +1,15 @@
 /* global L:readonly */
 
 import * as page from './page.js'
-import { setAddress } from './adForm.js'
+import { setAddress } from './ad-form.js'
 import { MAIN_PIN_COORDINATES } from './constants.js'
-import {createCustomPopup} from './generatingPopupMarkup.js';
+import {createCustomPopup} from './generating-popup-markup.js';
 import {getOffers} from './api.js';
 
 let map;
 
 function renderPins(ads){
+  console.log(ads);
   ads.forEach((ad) => {
     const { lat, lng} = ad.location;
     const pinIcon = L.icon({
@@ -24,6 +25,10 @@ function renderPins(ads){
 
   });
 }
+
+// collectLocation(locations){
+//  renderPins(locations);
+// }
 
 function renderPinsWithError(){
   // TODO красиво вывести сообщение об ошибке

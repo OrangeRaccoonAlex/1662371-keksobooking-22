@@ -1,4 +1,4 @@
-import { typeOfHousing } from './dictionary.js'
+import { typeOfHousing, typeOhFeatures } from './dictionary.js'
 
 const popupTemplate = document.querySelector('#card').content.querySelector('.popup');
 
@@ -37,7 +37,13 @@ function fillPopupTemplate(data){
 
   if (data.offer.features) {
     let popupFeatures = popup.querySelector('.popup__features');
-    popupFeatures.textContent = data.offer.features;
+    let featuresArr = data.offer.features;
+    let features = [];
+    featuresArr.forEach((item) => {
+      features.push(typeOhFeatures[item]);
+      return features;
+    })
+    popupFeatures.textContent = features;
   }
 
   if (data.offer.description) {

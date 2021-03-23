@@ -6,4 +6,13 @@ const typeOfHousing = {
   'bungalow': 'Бунгало',
 }
 
-export { typeOfHousing };
+const typeOhFeatures = {
+  'wifi': 'wifi',
+  'dishwasher': 'посудомоечная машина',
+  'parking': 'парковка',
+  'washer': 'стиральная машина',
+  'elevator': 'лифт',
+  'conditioner': 'кондиционер',
+}
+
+export { typeOfHousing, typeOhFeatures };

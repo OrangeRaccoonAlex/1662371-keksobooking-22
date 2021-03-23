@@ -2,7 +2,7 @@
 
 // import { setAddress } from './stateOfForm.js';
 import { activatePage } from './stateOfPage.js'
-import { createCustomPopup } from './generatingPopupMarkup.js'
+import { createCustomPopup } from './generating-popup-markup.js'
 import  { getData } from './workWithServer.js'
 import { MAIN_PIN_COORDINATES } from './constants.js'
 

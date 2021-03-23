@@ -1,5 +1,5 @@
-import * as adForm from './adForm.js'
-import * as filterForm from './filterForm.js'
+import * as adForm from './ad-form.js'
+import * as filterForm from './filter-form.js'
 
 function activate() {
   adForm.activate();

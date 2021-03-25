@@ -6,6 +6,9 @@ const address = adForm.querySelector('#address')
 const successMessage = document.querySelector('#success').content.querySelector('.success');
 const errorMessage = document.querySelector('#error').content.querySelector('.error');
 const main = document.querySelector('main');
+const adFormTimeFieldset = adForm.querySelector('.ad-form__element--time');
+const timein = adFormTimeFieldset.querySelector('#timein');
+const timeout = adFormTimeFieldset.querySelector('#timeout');
 
 function activate(){
   adForm.classList.remove('ad-form--disabled');
@@ -75,3 +78,33 @@ export { activate, deactivate, setAddress };
 */
 
 // TODO Цена за ночь: Максимальное значение — 1000000.
+
+// 3. Ограничения, накладываемые на поля ввода
+
+// 3.3. Поле «Тип жилья» влияет на минимальное значение поля «Цена за ночь»
+const housingType = document.querySelector('#housing-type');
+housingType.value = 'palace';
+
+function onChangeInput(name, value){
+  return () => {
+    // если меняется тип жилья, то в цене меняется значение по умолчанию + плейсхолдер
+    document.querySelector(name).textContent = value;
+    document.querySelector(name).placeholder = value;
+  }
+}
+function findChangedInput(name){
+  name.addEventListener('change', onChangeInput('#housing-price', '10000'));
+}
+
+findChangedInput(housingType);
+
+// 3.5. Поля «Время заезда» и «Время выезда» синхронизированы:
+// при изменении значения одного поля во втором выделяется соответствующее ему значение.
+// Например, если время заезда указано «после 14», то время выезда будет равно «до 14» и наоборот.
+
+// готово, работает
+
+adFormTimeFieldset.onchange = function(e) {
+  timein.value = e.target.value
+  timeout.value = e.target.value
+}
